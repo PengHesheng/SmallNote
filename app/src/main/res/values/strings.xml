@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SmallNote</string>
+    <string name="menu_all_notes">全部便签</string>
+    <string name="menu_settings">设置</string>
+    <string name="menu_recycle">回收站</string>
+    <string name="edt_hint_title">标题</string>
+    <string name="edt_hint_content">输入内容</string>
+    <string name="tv_un_login">未登陆</string>
+</resources>

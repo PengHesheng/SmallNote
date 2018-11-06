@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvTitleRecycleItem"
+        style="@style/TvTitleStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="This is a note" />
+
+    <TextView
+        android:id="@+id/tvContentRecycleItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvTitleRecycleItem"
+        app:layout_constraintStart_toStartOf="@+id/tvTitleRecycleItem"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleRecycleItem"
+        tools:text="This is a note content" />
+
+    <TextView
+        android:id="@+id/tvDateRecycleItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvContentRecycleItem"
+        app:layout_constraintStart_toStartOf="@+id/tvContentRecycleItem"
+        app:layout_constraintTop_toBottomOf="@+id/tvContentRecycleItem"
+        tools:text="11月20日" />
+</android.support.constraint.ConstraintLayout>

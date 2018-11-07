@@ -47,7 +47,19 @@ public final class LogUtil {
         return Log.e(tag, msg);
     }
 
+    /**
+     * @return 当前的类名(simpleName)
+     */
     public static String getClassName() {
-        return Thread.currentThread().getStackTrace()[1].getClassName();
+        String result;
+//        StackTraceElement thisMethodStack = Thread.currentThread().getStackTrace()[2];
+        StackTraceElement thisMethodStack = new Throwable().getStackTrace()[2];
+        result = thisMethodStack.getClassName();
+        int lastIndex = result.lastIndexOf(".");
+        result = result.substring(lastIndex + 1);
+
+        // TODO: 16/5/10 调试下 内部类问题
+        int i = result.indexOf("$");// 剔除匿名内部类名
+        return i == -1 ? result : result.substring(0, i);
     }
 }

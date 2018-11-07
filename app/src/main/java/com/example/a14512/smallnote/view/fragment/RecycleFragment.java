@@ -29,7 +29,7 @@ public class RecycleFragment extends BaseFragment<RecyclePresenter> implements I
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_settings;
+        return R.layout.fragment_recycle;
     }
 
     @Override

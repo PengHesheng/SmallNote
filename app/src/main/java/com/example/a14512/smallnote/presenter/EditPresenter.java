@@ -2,6 +2,7 @@ package com.example.a14512.smallnote.presenter;
 
 import com.example.a14512.smallnote.base.BasePresenter;
 import com.example.a14512.smallnote.mode.EditMode;
+import com.example.a14512.smallnote.mode.Note;
 import com.example.a14512.smallnote.view.IEditView;
 
 /**
@@ -26,7 +27,9 @@ public class EditPresenter extends BasePresenter<EditMode, IEditView> {
 
     }
 
-    public void save() {
-
+    public void save(Note note, boolean isNew) {
+        note.setTitle(mView.getNoteTitle());
+        note.setContent(mView.getNoteContent());
+        mView.finishWithResult(note, isNew);
     }
 }

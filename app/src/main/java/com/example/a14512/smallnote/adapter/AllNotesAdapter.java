@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class AllNotesAdapter extends RecyclerView.Adapter {
     private Context mContext;
-    private ArrayList<Note> mNotes;
+    private ArrayList<Note> mNotes = new ArrayList<>();
     private int mOrientation;
     private OnRecyclerListener mListener;
 
@@ -31,8 +31,11 @@ public class AllNotesAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void setNotes(ArrayList<Note> notes) {
-        mNotes = notes;
+    public void addNotes(ArrayList<Note> notes) {
+        if (notes == null) {
+            return;
+        }
+        mNotes.addAll(notes);
         notifyDataSetChanged();
     }
 
@@ -43,6 +46,16 @@ public class AllNotesAdapter extends RecyclerView.Adapter {
         boolean success = mNotes.add(note);
         notifyDataSetChanged();
         return success;
+    }
+
+    public boolean updateNote(int pos, Note note) {
+        if (pos < 0 || pos > getItemCount() || note == null) {
+            return false;
+        }
+        mNotes.remove(pos);
+        mNotes.add(pos, note);
+        notifyDataSetChanged();
+        return true;
     }
 
     public boolean deleteNote(int position) {

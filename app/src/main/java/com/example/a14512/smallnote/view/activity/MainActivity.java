@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
@@ -17,6 +18,7 @@ import com.example.a14512.smallnote.view.fragment.SettingFragment;
  * @author 14512
  */
 public class MainActivity extends AppCompatActivity {
+    private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private AllNotesFragment mAllNotesFragment;
     private RecycleFragment mRecycleFragment;
@@ -61,11 +63,13 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             transaction.commit();
+            mDrawerLayout.closeDrawers();
             return true;
         });
     }
 
     private void initView() {
+        mDrawerLayout = findViewById(R.id.drawerLayoutMain);
         mNavigationView = findViewById(R.id.navMain);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -73,4 +77,5 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.frameLayoutMain, mAllNotesFragment);
         transaction.commit();
     }
+
 }

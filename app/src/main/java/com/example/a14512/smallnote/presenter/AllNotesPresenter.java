@@ -1,5 +1,7 @@
 package com.example.a14512.smallnote.presenter;
 
+import android.content.Context;
+
 import com.example.a14512.smallnote.base.BasePresenter;
 import com.example.a14512.smallnote.mode.AllNotesMode;
 import com.example.a14512.smallnote.view.IAllNotesView;
@@ -18,8 +20,8 @@ public class AllNotesPresenter extends BasePresenter<AllNotesMode, IAllNotesView
         return new AllNotesMode();
     }
 
-    public void getNotes() {
-        mView.setDatas(mMode.getNotes());
+    public void getNotes(Context context) {
+        mView.setDatas(mMode.getNotes(context));
     }
 
 

@@ -58,7 +58,7 @@ public final class LogUtil {
         int lastIndex = result.lastIndexOf(".");
         result = result.substring(lastIndex + 1);
 
-        // TODO: 16/5/10 调试下 内部类问题
+        // 调试下 内部类问题
         int i = result.indexOf("$");// 剔除匿名内部类名
         return i == -1 ? result : result.substring(0, i);
     }

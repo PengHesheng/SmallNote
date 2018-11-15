@@ -10,6 +10,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -21,7 +23,7 @@ import android.widget.EditText;
 
 import com.example.a14512.smallnote.C;
 import com.example.a14512.smallnote.R;
-import com.example.a14512.smallnote.base.BaseActivity;
+import com.example.a14512.smallnote.base.BaseActivityMvp;
 import com.example.a14512.smallnote.mode.Note;
 import com.example.a14512.smallnote.presenter.EditPresenter;
 import com.example.a14512.smallnote.utils.ImageUtil;
@@ -32,7 +34,7 @@ import com.example.a14512.smallnote.view.IEditView;
 /**
  * @author 14512 on 2018/11/5
  */
-public class EditActivity extends BaseActivity<EditPresenter> implements IEditView {
+public class EditActivityMvp extends BaseActivityMvp<EditPresenter> implements IEditView {
     private Note mNote;
     private int mNotePos;
     private EditText mEdtTitle, mEdtContent;
@@ -46,8 +48,18 @@ public class EditActivity extends BaseActivity<EditPresenter> implements IEditVi
     }
 
     private void initView() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setSubtitle("写便签");
         mEdtTitle = findViewById(R.id.edtTitleEdit);
         mEdtContent = findViewById(R.id.edtContentEdit);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //让图标按钮展示出来
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            //设置图标在toolbar上
+            actionBar.setHomeAsUpIndicator(R.drawable.left);
+        }
     }
 
     private void getData() {
@@ -71,22 +83,26 @@ public class EditActivity extends BaseActivity<EditPresenter> implements IEditVi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
             case R.id.addImg:
                 checkPermission();
                 openAlbum();
-                return true;
+                break;
             case R.id.repeal:
                 mPresenter.repeal();
-                return true;
+                break;
             case R.id.recover:
                 mPresenter.recovery();
-                return true;
+                break;
             case R.id.save:
                 mPresenter.save(mNote, mNotePos < 0);
-                return true;
+                break;
             default:
-                return super.onOptionsItemSelected(item);
+                break;
         }
+        return true;
     }
 
     private void openAlbum() {
@@ -96,10 +112,10 @@ public class EditActivity extends BaseActivity<EditPresenter> implements IEditVi
     }
 
     private void checkPermission() {
-        if(ContextCompat.checkSelfPermission(EditActivity.this,
+        if(ContextCompat.checkSelfPermission(EditActivityMvp.this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(EditActivity.this,
+            ActivityCompat.requestPermissions(EditActivityMvp.this,
                     new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
     }

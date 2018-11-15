@@ -7,19 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.MainActivity">
 
-
-    <FrameLayout
-        android:id="@+id/frameLayoutMain"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar" />
+
+        <FrameLayout
+            android:id="@+id/frameLayoutMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navMain"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/menu_nav_main"/>
-
 
 </android.support.v4.widget.DrawerLayout>

@@ -10,12 +10,12 @@ import com.example.a14512.smallnote.C;
 import com.example.a14512.smallnote.R;
 import com.example.a14512.smallnote.adapter.AllNotesAdapter;
 import com.example.a14512.smallnote.adapter.OnRecyclerListener;
-import com.example.a14512.smallnote.base.BaseFragment;
+import com.example.a14512.smallnote.base.BaseFragmentMvp;
 import com.example.a14512.smallnote.mode.Note;
 import com.example.a14512.smallnote.presenter.AllNotesPresenter;
 import com.example.a14512.smallnote.utils.LogUtil;
 import com.example.a14512.smallnote.view.IAllNotesView;
-import com.example.a14512.smallnote.view.activity.EditActivity;
+import com.example.a14512.smallnote.view.activity.EditActivityMvp;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * @author 14512 on 2018/11/5
  */
-public class AllNotesFragment extends BaseFragment<AllNotesPresenter> implements IAllNotesView {
+public class AllNotesFragmentMvp extends BaseFragmentMvp<AllNotesPresenter> implements IAllNotesView {
     private RecyclerView mRecyclerView;
     private FloatingActionButton mActionButton;
     private AllNotesAdapter mAdapter;
@@ -47,18 +47,18 @@ public class AllNotesFragment extends BaseFragment<AllNotesPresenter> implements
         mAdapter.setListener(new OnRecyclerListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(getContext(), EditActivity.class);
+                Intent intent = new Intent(getContext(), EditActivityMvp.class);
                 intent.putExtra(C.NOTE_INTENT_KEY, mAdapter.getNote(position));
                 startActivityForResult(intent, RESULT_OK);
             }
 
             @Override
             public boolean onItemLongClick(View view, int position) {
-                return false;
+                return true;
             }
         });
         mActionButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), EditActivity.class);
+            Intent intent = new Intent(getContext(), EditActivityMvp.class);
             startActivityForResult(intent, RESULT_OK);
         });
     }
